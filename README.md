@@ -4,6 +4,8 @@ A local-first CloudOps/SRE portfolio platform: FastAPI backend, React/TypeScript
 Prometheus + Grafana monitoring, deterministic incident detection, evidence-based diagnosis, and **simulated** controlled
 recovery for disposable demo services.
 
+<img width="1440" height="700" alt="01-login" src="https://github.com/user-attachments/assets/1c5058c0-7d4a-40e4-a045-086b1780834d" />
+
 > **Honesty notes.** Recovery is **simulated**: nothing real is restarted, rolled back or executed. Deployment history is
 > *recorded* (or sample data), never performed by NexOps. Diagnosis is deterministic rules, not an AI model. See
 > [docs/BUILD_STATUS.md](docs/BUILD_STATUS.md) for exactly what was and was not verified.
@@ -28,6 +30,9 @@ deployment/   docker-compose.yml (PostgreSQL, Prometheus, Grafana)
 scripts/      Windows PowerShell scripts, env generator, end-to-end demo script
 docs/         Architecture, API, security/threat model, demo walkthrough, build status
 ```
+
+<img width="1440" height="900" alt="02-dashboard" src="https://github.com/user-attachments/assets/66ee5ee5-0334-48e8-873d-45833b5b9d17" />
+
 
 ## Quick start on Windows 11 (no Docker, SQLite)
 Prerequisites: Python 3.11+, Node.js 20+ (22 tested), Git. In PowerShell from the project root:
@@ -63,6 +68,8 @@ dashboard *NexOps → NexOps Overview*). The compose stack is **not verified** i
 or manually: `cd backend; .\.venv\Scripts\python.exe -m pytest -q` and `cd frontend; npm test`.
 To run the backend suite against PostgreSQL: set `TEST_DATABASE_URL=postgresql+psycopg://user:pass@localhost:5432/dbname`
 (the test database is dropped and recreated per test — use a throwaway database).
+
+<img width="390" height="1244" alt="16-mobile-dashboard" src="https://github.com/user-attachments/assets/535bc740-b260-4c84-83ff-58116cbd6823" />
 
 ## Environment variables
 See [.env.example](.env.example). Key ones (prefix `NEXOPS_`): `SECRET_KEY` (required, ≥32 chars, placeholder rejected),
