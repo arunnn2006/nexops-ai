@@ -1,0 +1,23 @@
+groups:
+  - name: nexops
+    rules:
+      - alert: NexOpsBackendDown
+        expr: up{job="nexops-backend"} == 0
+        for: 1m
+        labels: { severity: critical }
+        annotations: { summary: "NexOps backend is not being scraped" }
+      - alert: MonitoredServiceDown
+        expr: nexops_service_status{status="down"} == 1
+        for: 2m
+        labels: { severity: critical }
+        annotations: { summary: "Service {{ $labels.service }} reports status down" }
+      - alert: HighServerErrorRatio
+        expr: sum(rate(nexops_http_requests_total{status=~"5.."}[5m])) / sum(rate(nexops_http_requests_total[5m])) > 0.05
+        for: 5m
+        labels: { severity: warning }
+        annotations: { summary: "More than 5% of NexOps API responses are 5xx" }
+      - alert: CriticalIncidentsOpen
+        expr: nexops_open_incidents{severity="critical"} > 0
+        for: 1m
+        labels: { severity: warning }
+        annotations: { summary: "{{ $value }} critical incident(s) are unresolved" }
